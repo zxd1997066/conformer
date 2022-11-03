@@ -23,7 +23,6 @@ setup(
     author_email='sh951011@gmail.com',
     url='https://github.com/sooftware/conformer',
     install_requires=[
-        'torch>=1.4.0',
         'numpy',
     ],
     keywords=['asr', 'speech_recognition', 'conformer', 'end-to-end'],
