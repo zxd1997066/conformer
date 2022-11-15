@@ -90,6 +90,7 @@ def evaluate(args, model, inputs, input_lengths, criterion, targets, target_leng
         # Forward propagate
         elapsed = time.time()
         outputs, output_lengths = model(inputs, input_lengths)
+        if torch.cuda.is_available(): torch.cuda.synchronize()
         elapsed = time.time() - elapsed
         if args.profile:
             args.p.step()
