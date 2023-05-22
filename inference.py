@@ -131,6 +131,10 @@ if __name__ == "__main__":
             print("---- Use AMP autocast bfloat16 cpu")
             with torch.cpu.amp.autocast(enabled=True, dtype=torch.bfloat16):
                 main(args)
+        elif args.precision == "float16" and args.device == "cpu":
+            print("---- Use AMP autocast float16 cpu")
+            with torch.cpu.amp.autocast(enabled=True, dtype=torch.half):
+                main(args)
         elif args.precision == "float16" and args.device == "cuda":
             print("---- Use AMP autocast float16 cuda")
             with torch.cuda.amp.autocast(enabled=True, dtype=torch.float16):
