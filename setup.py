@@ -17,7 +17,6 @@ from setuptools import setup, find_packages
 setup(
     name='conformer',
     packages = find_packages(),
-    version='latest',
     description='Convolution-augmented Transformer for Speech Recognition',
     author='Soohwan Kim',
     author_email='sh951011@gmail.com',
