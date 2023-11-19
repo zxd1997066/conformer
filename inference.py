@@ -19,6 +19,10 @@ def parse_args():
     parser.add_argument('--num_iter', default=1, type=int, help='test iterations')
     parser.add_argument('--num_warmup', default=0, type=int, help='test warmup')
     parser.add_argument('--device', default='cpu', type=str, help='cpu, cuda or xpu')
+    parser.add_argument("--compile", action='store_true', default=False,
+                    help="enable torch.compile")
+    parser.add_argument("--backend", type=str, default='inductor',
+                    help="enable torch.compile backend")
     args = parser.parse_args()
     print(args)
     return args
@@ -65,6 +69,8 @@ def main(args):
 def evaluate(args, model, inputs, input_lengths, criterion, targets, target_lengths):
     model.eval()
     print(inputs.shape, input_lengths.shape)
+    if args.compile:
+        model = torch.compile(model, backend=args.backend, options={"freezing": True})
     if args.channels_last:
         try:
             model = model.to(memory_format=torch.channels_last)
