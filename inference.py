@@ -7,6 +7,10 @@ import os
 import sys
 import time
 import argparse
+from torch._inductor import config
+import torch._inductor
+torch._inductor.config.profiler_mark_wrapper_call = True
+torch._inductor.config.cpp.enable_kernel_profile = True
 
 
 def parse_args():
