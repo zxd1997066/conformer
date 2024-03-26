@@ -30,6 +30,9 @@ function main {
             if [ $batch_size -le 0 ];then
                 batch_size=64
             fi
+            if [ "${device}" == "cuda" ];then
+                batch_size=32
+            fi
             # clean workspace
             logs_path_clean
             # generate launch script for multiple instance
