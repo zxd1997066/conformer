@@ -27,13 +27,17 @@ def parse_args():
                     help="enable torch.compile")
     parser.add_argument("--backend", type=str, default='inductor',
                     help="enable torch.compile backend")
+    parser.add_argument("--triton_cpu", action='store_true', default=False,
+                    help="enable triton_cpu")
     args = parser.parse_args()
     print(args)
     return args
 
 def main(args):
     sequence_length, dim = 12345, 80
-
+    if args.triton_cpu:
+        import torch._inductor.config
+        torch._inductor.config.cpu_backend="triton"
     cuda = True if args.device == 'cuda' and torch.cuda.is_available() else False
     device = torch.device('cuda' if cuda else 'cpu')
 
