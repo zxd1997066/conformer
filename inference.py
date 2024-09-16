@@ -38,6 +38,7 @@ def main(args):
     if args.triton_cpu:
         import torch._inductor.config
         torch._inductor.config.cpu_backend="triton"
+    import torch
     cuda = True if args.device == 'cuda' and torch.cuda.is_available() else False
     device = torch.device('cuda' if cuda else 'cpu')
 
